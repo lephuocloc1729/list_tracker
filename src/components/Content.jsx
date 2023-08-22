@@ -1,18 +1,4 @@
-const Content = ({ items, setItems }) => {
-  const deleteItem = (id) => {
-    let newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
-    localStorage.setItem("shoppinglist", JSON.stringify(newItems));
-  };
-
-  const completeTask = (id) => {
-    let newItems = items.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
-    );
-    setItems(newItems);
-    localStorage.setItem("shoppinglist", JSON.stringify(newItems));
-  };
-
+const Content = ({ items, setItems, onComplete, onDelete }) => {
   return (
     <main>
       <ul>
@@ -27,7 +13,7 @@ const Content = ({ items, setItems }) => {
                 id={item.id}
                 className="text-4xl"
                 checked={item.checked}
-                onChange={() => completeTask(item.id)}
+                onChange={() => onComplete(item.id)}
               />
               <div
                 className={item.checked ? "line-through text-3xl" : "text-3xl"}
@@ -36,7 +22,7 @@ const Content = ({ items, setItems }) => {
               </div>
               <button
                 className="px-4 py-2 bg-red-500 text-white rounded-xl"
-                onClick={() => deleteItem(item.id)}
+                onClick={() => onDelete(item.id)}
               >
                 Delete
               </button>
