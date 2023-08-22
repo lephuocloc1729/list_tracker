@@ -1,12 +1,12 @@
 const Content = ({ items, setItems, onComplete, onDelete }) => {
   return (
-    <main>
-      <ul>
+    <>
+      <ul className="px-4">
         {items.length ? (
           items.map((item) => (
             <li
               key={item.id}
-              className={"flex justify-around items-center my-3"}
+              className={"flex justify-around items-center my-3 gap-4"}
             >
               <input
                 type="checkbox"
@@ -16,7 +16,11 @@ const Content = ({ items, setItems, onComplete, onDelete }) => {
                 onChange={() => onComplete(item.id)}
               />
               <div
-                className={item.checked ? "line-through text-3xl" : "text-3xl"}
+                className={
+                  item.checked
+                    ? "line-through text-2xl flex-1"
+                    : "text-2xl flex-1"
+                }
               >
                 {item.item}
               </div>
@@ -34,7 +38,7 @@ const Content = ({ items, setItems, onComplete, onDelete }) => {
           </p>
         )}
       </ul>
-    </main>
+    </>
   );
 };
 
